@@ -29,7 +29,7 @@ export default function FileUploader() {
       setShowForm(false);
 
       const toastId = toast.loading("🔍 Scanning for QR code...");
-      console.log("🔗 API:", process.env.REACT_APP_API_URL);
+      console.log("🔗 API:", import.meta.env.VITE_API_UR);
       const res = await fetch(`${API_URL}/api/upload`, {
         method: "POST",
         body: formData,
@@ -202,13 +202,13 @@ export default function FileUploader() {
             </a>
           )}
 
-          <a
+          {/* <a
             href={`${API_URL}/uploads/${qrResult.file}`}
             download
             className="mt-3 inline-block text-blue-700 underline font-semibold"
           >
             ⬇️ Download {qrAdded ? "Updated" : "Uploaded"} File
-          </a>
+          </a> */}
         </div>
       )}
     </div>
