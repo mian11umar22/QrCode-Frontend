@@ -58,7 +58,7 @@ export default function FileUploader() {
 
       const formData = new FormData();
       files.forEach((file) => formData.append("files", file));
-      formData.append("employee", JSON.stringify({ employeeId: employee })); // ✅ wrap in object
+      formData.append("employee", JSON.stringify({ employeeId: employee }));
 
       const res = await fetch(`${API_URL}/api/addqr`, {
         method: "POST",
@@ -81,7 +81,7 @@ export default function FileUploader() {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-20 p-6 bg-white rounded-xl shadow-md">
+    <div className="max-w-xl mx-auto mt-20 p-6 bg-white rounded-xl shadow-md relative">
       <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
         📄 QR Code Document Processor
       </h2>
@@ -182,6 +182,13 @@ export default function FileUploader() {
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {/* ✅ Loading Spinner Overlay */}
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+          <div className="w-12 h-12 border-4 border-white border-t-blue-600 rounded-full animate-spin"></div>
         </div>
       )}
     </div>
