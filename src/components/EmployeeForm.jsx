@@ -1,5 +1,7 @@
 import { useReducer } from "react";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const initialState = {
   Name: "",
   Department: "",
@@ -36,7 +38,7 @@ export default function EmployeeForm({ filename, onFormSubmitted }) {
     }
     formData.append("filename", filename);
 
-    const res = await fetch("http://localhost:3000/api/form", {
+    const res = await fetch(`${API_URL}/api/form`, {
       method: "POST",
       body: formData,
     });
@@ -57,7 +59,9 @@ export default function EmployeeForm({ filename, onFormSubmitted }) {
         className="space-y-4 bg-gray-50 p-4 rounded-md shadow"
       >
         <div>
-          <label className="block text-sm font-medium text-gray-700">Full Name</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Full Name
+          </label>
           <input
             name="Name"
             onChange={handleChange}
@@ -68,7 +72,9 @@ export default function EmployeeForm({ filename, onFormSubmitted }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Department</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Department
+          </label>
           <input
             name="Department"
             onChange={handleChange}
@@ -79,7 +85,9 @@ export default function EmployeeForm({ filename, onFormSubmitted }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Designation</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Designation
+          </label>
           <input
             name="Designation"
             onChange={handleChange}
@@ -90,7 +98,9 @@ export default function EmployeeForm({ filename, onFormSubmitted }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Date of Joining</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Date of Joining
+          </label>
           <input
             name="date_of_joining"
             type="date"
@@ -101,7 +111,9 @@ export default function EmployeeForm({ filename, onFormSubmitted }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Issued By</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Issued By
+          </label>
           <input
             name="issuedby"
             onChange={handleChange}

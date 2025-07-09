@@ -2,6 +2,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import EmployeeForm from "./EmployeeForm";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function FileUploader() {
   const [file, setFile] = useState(null);
   const [qrResult, setQrResult] = useState(null);
@@ -28,7 +30,7 @@ export default function FileUploader() {
 
       const toastId = toast.loading("🔍 Scanning for QR code...");
 
-      const res = await fetch("http://localhost:3000/api/upload", {
+      const res = await fetch(`${API_URL}/api/upload`, {
         method: "POST",
         body: formData,
       });
@@ -63,7 +65,7 @@ export default function FileUploader() {
       setLoading(true);
       const toastId = toast.loading("➕ Adding QR Code...");
 
-      const res = await fetch("http://localhost:3000/api/addqr", {
+      const res = await fetch(`${API_URL}/api/addqr`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ filename: qrResult.file, employeeId }),
@@ -78,8 +80,8 @@ export default function FileUploader() {
       setQrAdded(true);
       setQrResult((prev) => ({
         ...prev,
-        ...data, // update with final filename, verifyUrl, etc.
-        qrdata: employeeId, // force truthy value to avoid UI reverting
+        ...data,
+        qrdata: employeeId,
       }));
     } catch (err) {
       console.error("Add QR failed:", err);
@@ -129,7 +131,6 @@ export default function FileUploader() {
         )}
       </form>
 
-      {/* ✅ QR Data Found */}
       {qrResult?.qrdata && (
         <div className="mt-4 p-4 border border-green-300 rounded-md bg-green-50 text-sm">
           ✅ QR Data Found:
@@ -137,7 +138,6 @@ export default function FileUploader() {
         </div>
       )}
 
-      {/* ⚠️ QR Not Found */}
       {qrResult && !qrResult.qrdata && !qrAdded && !showForm && (
         <div className="mt-4 text-center">
           <p className="text-yellow-600 font-medium mb-2">
@@ -153,7 +153,6 @@ export default function FileUploader() {
         </div>
       )}
 
-      {/* 📝 Show Employee Form */}
       {showForm && qrResult?.file && (
         <EmployeeForm
           filename={qrResult.file}
@@ -164,42 +163,37 @@ export default function FileUploader() {
         />
       )}
 
-      {/* ✅ QR Added Confirmation */}
       {qrAdded && (
         <div className="mt-4 text-center text-green-700 font-medium">
           🎉 QR code successfully added to the file!
         </div>
       )}
 
-      {/* 🖼️ File Preview */}
       {qrResult?.file && (
         <div className="mt-6 border-2 border-blue-200 rounded-md p-4">
           <h3 className="text-sm font-semibold mb-2">
             📎 {qrAdded ? "Updated File with QR" : "Uploaded File Preview"}:
           </h3>
 
-          {/* Image Preview */}
           {/\.(jpg|jpeg|png)$/i.test(qrResult.file) && (
             <img
-              src={`http://localhost:3000/uploads/${qrResult.file}`}
+              src={`${API_URL}/uploads/${qrResult.file}`}
               alt="Uploaded"
               className="max-w-full h-auto border rounded-md"
             />
           )}
 
-          {/* PDF Preview */}
           {/\.pdf$/i.test(qrResult.file) && (
             <iframe
-              src={`http://localhost:3000/uploads/${qrResult.file}`}
+              src={`${API_URL}/uploads/${qrResult.file}`}
               className="w-full h-64 border rounded-md"
               title="Uploaded PDF"
             ></iframe>
           )}
 
-          {/* DOCX Link */}
           {/\.docx$/i.test(qrResult.file) && (
             <a
-              href={`http://localhost:3000/uploads/${qrResult.file}`}
+              href={`${API_URL}/uploads/${qrResult.file}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 underline"
@@ -208,9 +202,8 @@ export default function FileUploader() {
             </a>
           )}
 
-          {/* Download */}
           <a
-            href={`http://localhost:3000/uploads/${qrResult.file}`}
+            href={`${API_URL}/uploads/${qrResult.file}`}
             download
             className="mt-3 inline-block text-blue-700 underline font-semibold"
           >

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function EmployeeVerify() {
   const { employeeId } = useParams();
   const [employee, setEmployee] = useState(null);
@@ -9,9 +11,7 @@ export default function EmployeeVerify() {
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:3000/api/verify/${employeeId}`
-        );
+        const res = await fetch(`${API_URL}/api/verify/${employeeId}`);
         const data = await res.json();
 
         if (res.ok && data.success) {
@@ -60,7 +60,7 @@ export default function EmployeeVerify() {
 
       <div className="flex flex-col items-center">
         <img
-          src={`http://localhost:3000/${employee.image}`}
+          src={`${API_URL}/${employee.image}`}
           alt="Employee"
           className="w-32 h-32 object-cover rounded-full border-4 border-yellow-400 mb-4"
         />
