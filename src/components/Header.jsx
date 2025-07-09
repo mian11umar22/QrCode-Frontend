@@ -26,7 +26,9 @@ export default function Header() {
 
         <Link
           to="/list"
-          className={`text-white px-4 py-2 rounded-md text-sm font-medium`}
+          className={`whitespace-nowrap text-white px-4 py-2 rounded-md text-sm font-medium ${isActive(
+            "/list"
+          )}`}
         >
           👥 View Employees
         </Link>
