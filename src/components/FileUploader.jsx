@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import EmployeeForm from "./EmployeeForm";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function FileUploader() {
   const [file, setFile] = useState(null);
