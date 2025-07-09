@@ -94,7 +94,7 @@ export default function EmployeeVerify() {
       <div className="mt-10 text-center text-gray-700 text-sm">
         ✅ Verified by{" "}
         <a
-          href="https://dotlabs.com/verify"
+          href="https://dotlabs.com/"
           className="text-blue-600 underline"
           target="_blank"
           rel="noopener noreferrer"
