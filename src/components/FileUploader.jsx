@@ -29,7 +29,7 @@ export default function FileUploader() {
       setShowForm(false);
 
       const toastId = toast.loading("🔍 Scanning for QR code...");
-
+      console.log("🔗 API:", process.env.REACT_APP_API_URL);
       const res = await fetch(`${API_URL}/api/upload`, {
         method: "POST",
         body: formData,
