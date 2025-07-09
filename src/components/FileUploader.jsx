@@ -58,7 +58,7 @@ export default function FileUploader() {
 
       const formData = new FormData();
       files.forEach((file) => formData.append("files", file));
-      formData.append("employee", JSON.stringify(employee));
+      formData.append("employee", JSON.stringify({ employeeId: employee })); // ✅ wrap in object
 
       const res = await fetch(`${API_URL}/api/addqr`, {
         method: "POST",
