@@ -149,11 +149,17 @@ export default function FileUploader() {
         </div>
       )}
 
-      {/* QR Found Result (Scan Mode) */}
       {qrResult?.qrdata && mode === "scan" && (
         <div className="mt-4 p-3 border border-green-300 rounded bg-green-50">
           ✅ QR Found:
-          <pre className="text-sm mt-1 break-words">{qrResult.qrdata}</pre>
+          <a
+            href={qrResult.qrdata}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-1 text-sm text-blue-600 underline break-words"
+          >
+            {qrResult.qrdata}
+          </a>
         </div>
       )}
 

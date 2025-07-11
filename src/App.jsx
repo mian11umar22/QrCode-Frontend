@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import EmployeeForm from "./components/EmployeeForm";
+
 import FileUploader from "./components/FileUploader";
 import EmployeeVerify from "./components/EmployeeVerify";
 import EmployeeList from "./components/EmployeeList";
