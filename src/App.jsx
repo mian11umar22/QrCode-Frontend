@@ -2,20 +2,24 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EmployeeForm from "./components/EmployeeForm";
 import FileUploader from "./components/FileUploader";
 import EmployeeVerify from "./components/EmployeeVerify";
-import { Toaster } from "react-hot-toast";
 import EmployeeList from "./components/EmployeeList";
-import Header from "./components/Header";
- 
+import MainLayout from "./components/MainLayout";
+import { Toaster } from "react-hot-toast";
+
 function App() {
   return (
     <Router>
-  <Header/>
+      <Toaster />
       <Routes>
-        <Route path="/" element={<FileUploader />} />
-        <Route path="/verify/:employeeId" element={<EmployeeVerify />} />{" "}
-      <Route path="/list" element={<EmployeeList/>}/>
+        {/* Routes with header */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<FileUploader />} />
+          <Route path="/list" element={<EmployeeList />} />
+        </Route>
+
+        {/* Routes without header */}
+        <Route path="/verify/:employeeId" element={<EmployeeVerify />} />
       </Routes>
-     
     </Router>
   );
 }
